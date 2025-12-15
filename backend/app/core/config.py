@@ -26,7 +26,7 @@ from pydantic_settings import BaseSettings
 from pydantic import AnyHttpUrl, validator
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "NarratoAI Backend"
+    PROJECT_NAME: str = "comicDrama Backend"
     API_V1_STR: str = "/api/v1"
     
     # --- 数据库配置 ---
