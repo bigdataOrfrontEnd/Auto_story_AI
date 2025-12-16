@@ -3,6 +3,7 @@ from sqlalchemy.orm import declarative_base
 from .config import settings
 from typing import AsyncGenerator
 from sqlalchemy import text
+from app.models.base import BaseModel
 
 # 创建异步数据库引擎
 engine = create_async_engine(
@@ -22,7 +23,7 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 # 基础模型类
-Base = declarative_base()
+# Base = declarative_base()
 
 # 依赖注入：获取数据库会话
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
@@ -52,7 +53,7 @@ async def init_db() -> None:
         db_name = result.scalar()
         print("当前连接数据库：", db_name)
         
-        await conn.run_sync(Base.metadata.create_all)
+        await conn.run_sync(BaseModel.metadata.create_all)
     print("数据库表已成功创建")
 
 async def close_db() -> None:
