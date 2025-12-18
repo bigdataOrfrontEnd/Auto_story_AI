@@ -1,0 +1,24 @@
+.console-layout-breadcrumb {
+  &.ant-breadcrumb ol {
+    flex-wrap: nowrap;
+  }
+  .ant-breadcrumb-overlay-link {
+    display: inline-flex;
+    align-items: center;
+    &:first-child > span {
+      > .anticon {
+        margin-right: 3px;
+      }
+    }
+  }
+  .ant-breadcrumb-link {
+    display: flex;
+    &:first-child > span {
+      display: inline-flex;
+      align-items: center;
+      > svg {
+        margin-right: 4px;
+      }
+    }
+  }
+}

@@ -1,32 +1,92 @@
 {
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
+  "name": "frantend",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist-lib/react-antd-console.js",
+  "module": "./dist-lib/react-antd-console.js",
+  "exports": {
+    ".": {
+      "import": "./dist-lib/react-antd-console.js",
+      "require": "./dist-lib/react-antd-console.js"
+    }
+  },
+  "types": "./dist-lib/react-antd-console.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "start": "vite --mode localhost",
+    "start:force": "vite --force --mode localhost",
+    "build:dev": "vite build --mode dev",
+    "build:test": "vite build --mode test",
+    "build:uat": "vite build --mode uat",
+    "build:prod": "vite build --mode prod",
+    "build:lib": "vite build --mode lib",
+    "preview": "vite preview --mode prod",
+    "prepare": "husky",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "analysis": "vite-bundle-visualizer --mode prod",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --cache --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "examples/**/*.{js,jsx,ts,tsx}": "eslint --cache --ext .js,.jsx,.ts,.tsx --max-warnings 0"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@zhangsai/model": "^0.0.3",
+    "admin-search-list": "^1.0.5",
+    "antd": "^6.1.1",
     "axios": "^1.13.2",
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.19",
+    "echarts": "^6.0.0",
+    "framer-motion": "^12.23.24",
+    "i18next": "^25.6.3",
+    "immer": "^11.0.0",
+    "nprogress": "^0.2.0",
     "react": "^19.2.0",
+    "react-contexify": "^6.0.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.10.1"
+    "react-i18next": "^16.3.5",
+    "react-router": "^7.9.6",
+    "react-router-toolset": "^0.0.9",
+    "react-use": "^17.6.0",
+    "store2": "^2.14.4"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
+    "@types/nprogress": "^0.2.3",
+    "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
     "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
+    "autoprefixer": "^10.4.22",
+    "eslint": "8.57.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "fast-glob": "^3.3.3",
+    "husky": "^9.1.7",
+    "less": "^4.4.2",
+    "lint-staged": "^16.2.7",
+    "mermaid": "^11.12.1",
+    "msw": "^2.12.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4",
+    "vite-bundle-visualizer": "^1.2.1",
+    "vite-plugin-sitemap": "^0.8.2",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-svgr": "^4.5.0",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
