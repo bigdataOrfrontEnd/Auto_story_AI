@@ -24,6 +24,8 @@ class ModelProvider(models.Model):
         ('core.ai_client.image2video_client.Image2VideoClient', '图生视频客户端'),
         ('core.ai_client.comfyui_client.ComfyUIClient', 'ComfyUI客户端'),
     ]
+
+   
     id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name=models.CharField(max_length=255, verbose_name="模型提供商名称")
     provider_type=models.CharField(max_length=50, verbose_name="提供商类型",choices=PROVIDER_TYPES)  
@@ -96,6 +98,14 @@ class ModelUsageLog(models.Model):
     模型使用日志
     职责: 记录模型调用历史,用于统计和成本计算
     """
+    STATUS_CHOICES = [
+    ('success', '成功'),
+    ('failed', '失败'),
+    ('timeout', '超时'),
+    ('rate_limited', '限流'),
+    ('error', '错误'),
+]
+    
     id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
     model_provider=models.ForeignKey(ModelProvider, on_delete=models.CASCADE,related_name='usage_logs', verbose_name="模型提供商")
     
@@ -106,7 +116,7 @@ class ModelUsageLog(models.Model):
     # 统计信息
     tokens_used=models.IntegerField(null=True, blank=True, verbose_name="使用Token数",default=0)
     latency_ms=models.IntegerField(null=True, blank=True, verbose_name="延迟(毫秒)",default=0)
-    status=models.CharField(max_length=50, verbose_name="状态",default='success')  # success, failed
+    status=models.CharField(max_length=50, verbose_name="状态",default='success',choices=STATUS_CHOICES)  # success, failed
     error_message=models.TextField(null=True, blank=True, verbose_name="错误信息")
 
     # 关联信息
