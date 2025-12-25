@@ -25,8 +25,16 @@ class ModelProviderViewSet(viewsets.ModelViewSet):
         支持按模型提供商ID和项目ID过滤
         """
         qs=ModelProvider.objects.all().prefetch_related('usage_logs')
-        qs = qs.annotate(code=Value(200, output_field=IntegerField()))
-        return Response(qs,status=status.HTTP_200_OK)
+        print(qs)
+        
+        return Response({
+            "code":"200",
+            'success': True,
+            'message': '获取成功',
+            'data': {
+
+            }
+        },status=status.HTTP_200_OK)
     
     def get_serializer_class(self):
         """根据动作选择序列化器"""
