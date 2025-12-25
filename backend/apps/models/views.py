@@ -25,15 +25,13 @@ class ModelProviderViewSet(viewsets.ModelViewSet):
         支持按模型提供商ID和项目ID过滤
         """
         qs=ModelProvider.objects.all().prefetch_related('usage_logs')
-        print(qs)
+        response_serializer=ModelProviderListSerializer(qs)
         
         return Response({
             "code":"200",
             'success': True,
             'message': '获取成功',
-            'data': {
-
-            }
+            'data': response_serializer.data
         },status=status.HTTP_200_OK)
     
     def get_serializer_class(self):
